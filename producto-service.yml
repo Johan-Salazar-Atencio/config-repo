@@ -1,15 +1,22 @@
-server:
-  port: 8083
-
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/bd_daw14_producto_dev
-    username: root
-    password:
+  application:
+    name: producto-service
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
 mensaje:
   texto: Configuración obtenida desde Config Server para Producto Service
+
+# Demora simulada (ms) para las pruebas de Retry y Bulkhead; 0 = sin demora
+demora:
+  ms: 0
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+  client:
+    registry-fetch-interval-seconds: 5
